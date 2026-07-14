@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>us, developing — Tbilisi 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,500&family=Caveat:wght@500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #F7EFE4;
+    --plum: #3D2A2E;
+    --rose: #C9838B;
+    --sage: #6E7A5E;
+    --sage-deep: #4B5540;
+    --paper: #FFFCF6;
+    --tape: #EADFC8;
+    --shadow: rgba(61,42,46,0.18);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background: var(--cream);
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(201,131,139,0.08), transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(110,122,94,0.08), transparent 40%);
+    color: var(--plum);
+    font-family: 'Fraunces', serif;
+    overflow-x:hidden;
+  }
+
+  .noise{
+    position:fixed; inset:0; pointer-events:none; z-index:1000;
+    opacity:0.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a{color:inherit;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 8vh 6vw 6vh;
+    position:relative;
+  }
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color: var(--sage-deep);
+    margin-bottom: 1.4rem;
+  }
+
+  .eyebrow::before{content:"◈ ";}
+
+  h1{
+    font-size: clamp(2.6rem, 8vw, 5.4rem);
+    font-weight:600;
+    line-height:0.98;
+    margin: 0 0 0.6rem;
+    letter-spacing:-0.01em;
+  }
+  h1 em{
+    font-style:italic;
+    color: var(--rose);
+    font-weight:400;
+  }
+
+  .hero-sub{
+    font-family:'Caveat', cursive;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    color: var(--sage-deep);
+    max-width: 34ch;
+    margin: 0.6rem 0 3rem;
+  }
+
+  /* film strip hero image */
+  .strip-wrap{
+    position:relative;
+    width: min(280px, 62vw);
+    filter: drop-shadow(0 30px 40px var(--shadow));
+    animation: sway 7s ease-in-out infinite;
+    transform-origin: top center;
+  }
+  @keyframes sway{
+    0%,100%{ transform: rotate(-2.2deg); }
+    50%{ transform: rotate(2deg); }
+  }
+  .strip-wrap img{
+    width:100%;
+    display:block;
+    border-radius: 2px;
+  }
+
+  .scroll-cue{
+    margin-top: 3.2rem;
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color: var(--plum);
+    opacity:0.55;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0.5rem;
+  }
+  .scroll-cue .line{
+    width:1px; height:34px;
+    background: currentColor;
+    animation: dropline 1.8s ease-in-out infinite;
+  }
+  @keyframes dropline{
+    0%{ transform: scaleY(0); transform-origin: top; }
+    50%{ transform: scaleY(1); transform-origin: top; }
+    51%{ transform: scaleY(1); transform-origin: bottom; }
+    100%{ transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* ---------- Section headers ---------- */
+  .section-head{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5vh 6vw 2vh;
+    display:flex;
+    align-items:baseline;
+    gap:1rem;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    margin:0;
+    font-weight:600;
+  }
+  .section-head .tag{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color: var(--rose);
+  }
+
+  /* ---------- Scrapbook grid ---------- */
+  .board{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2vh 6vw 10vh;
+    display:grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 28px 22px;
+  }
+
+  .card{
+    position:relative;
+    background: var(--paper);
+    padding: 14px 14px 46px;
+    border-radius: 3px;
+    box-shadow: 0 18px 34px var(--shadow), 0 2px 4px rgba(61,42,46,0.12);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
+  .card:hover{
+    transform: translateY(-6px) rotate(0deg) !important;
+    box-shadow: 0 26px 46px var(--shadow), 0 3px 6px rgba(61,42,46,0.14);
+    z-index:5;
+  }
+  .card img{
+    width:100%;
+    display:block;
+    object-fit:cover;
+    border-radius: 1px;
+    background: var(--tape);
+  }
+  .card .cap{
+    position:absolute;
+    left:16px; right:16px; bottom:12px;
+    font-family:'Caveat', cursive;
+    font-size:1.3rem;
+    color: var(--plum);
+  }
+  .tape{
+    position:absolute;
+    width:64px; height:22px;
+    background: var(--tape);
+    opacity:0.85;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  }
+
+  /* placement per card */
+  .c1{ grid-column: span 5; transform: rotate(-2deg); }
+  .c1 img{ height: 480px; }
+  .c2{ grid-column: span 4; transform: rotate(2.5deg); margin-top: 60px;}
+  .c2 img{ height: 320px; }
+  .c3{ grid-column: span 3; transform: rotate(-1.5deg); }
+  .c3 img{ height: 300px; }
+  .c4{ grid-column: span 6; transform: rotate(1.5deg); }
+  .c4 img{ height: 340px; }
+  .c5{ grid-column: span 3; transform: rotate(-3deg); margin-top: 40px;}
+  .c5 img{ height: 260px; }
+  .c6{ grid-column: span 3; transform: rotate(2deg); margin-top: 40px;}
+  .c6 img{ height: 260px; }
+
+  @media (max-width: 860px){
+    .board{ grid-template-columns: repeat(2, 1fr); gap: 30px 16px; padding-top: 1vh;}
+    .c1,.c2,.c3,.c4,.c5,.c6{ grid-column: span 2; margin-top:0 !important; }
+    .c1 img,.c2 img,.c3 img,.c4 img,.c5 img,.c6 img{ height: 60vw; max-height: 420px; }
+  }
+  @media (max-width: 480px){
+    .board{ grid-template-columns: 1fr; }
+    .c1,.c2,.c3,.c4,.c5,.c6{ grid-column: span 1; }
+  }
+
+  /* ---------- Log strip (mock commit log for github flavor) ---------- */
+  .log{
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 4vh 6vw 12vh;
+  }
+  .log-item{
+    display:grid;
+    grid-template-columns: 90px 1fr;
+    gap: 18px;
+    padding: 16px 0;
+    border-top: 1px dashed rgba(61,42,46,0.2);
+    align-items:baseline;
+  }
+  .log-item:last-child{ border-bottom: 1px dashed rgba(61,42,46,0.2); }
+  .log-date{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    color: var(--sage-deep);
+    letter-spacing:0.04em;
+  }
+  .log-msg{ font-size:1.05rem; }
+  .log-msg .hash{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    color: var(--rose);
+    margin-right: 0.6em;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center;
+    padding: 6vh 6vw 8vh;
+    font-family:'Caveat', cursive;
+    font-size: 1.4rem;
+    color: var(--sage-deep);
+  }
+  footer .small{
+    display:block;
+    font-family:'Space Mono', monospace;
+    font-size:0.65rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color: var(--plum);
+    opacity:0.45;
+    margin-top: 1rem;
+  }
+
+  ::selection{ background: var(--rose); color: var(--paper); }
+</style>
+</head>
+<body>
+<div class="noise"></div>
+
+<section class="hero">
+  <div class="eyebrow">tbilisi · ongoing</div>
+  <h1>a small, <em>unfinished</em><br>archive of us</h1>
+  <p class="hero-sub">field notes, photobooth strips &amp; other proof that we happened</p>
+
+  <div class="strip-wrap">
+    <img src="images/photobooth.jpg" alt="Photobooth strip of a couple, Tbilisi 2026">
+  </div>
+
+  <div class="scroll-cue">
+    <span>keep scrolling</span>
+    <span class="line"></span>
+  </div>
+</section>
+
+<div class="section-head">
+  <h2>the board</h2>
+  <span class="tag">unsorted, mostly blurry</span>
+</div>
+
+<div class="board">
+  <div class="card c1">
+    <img src="images/mirror-selfie.jpg" alt="Mirror selfie in a hotel room">
+    <span class="tape" style="top:-10px; left:40%; transform: rotate(-4deg);"></span>
+    <div class="cap">the hotel mirror always steals the light</div>
+  </div>
+
+  <div class="card c2">
+    <img src="images/park-smoke.jpg" alt="Selfie in the park">
+    <span class="tape" style="top:-10px; left:30%; transform: rotate(3deg);"></span>
+    <div class="cap">park bench, unserious faces</div>
+  </div>
+
+  <div class="card c3">
+    <img src="images/jacket-back.jpg" alt="Person seen from behind wearing a jacket">
+    <span class="tape" style="top:-10px; left:35%; transform: rotate(-2deg);"></span>
+    <div class="cap">before he turned around</div>
+  </div>
+
+  <div class="card c4">
+    <img src="images/night-piggyback.jpg" alt="Piggyback ride at night on the grass">
+    <span class="tape" style="top:-10px; left:44%; transform: rotate(5deg);"></span>
+    <div class="cap">this is how we usually get home</div>
+  </div>
+
+  <div class="card c5">
+    <img src="images/angel-edit.jpg" alt="Edited photo with angel wings and halo">
+    <span class="tape" style="top:-10px; left:32%; transform: rotate(-3deg);"></span>
+    <div class="cap">canonized, apparently</div>
+  </div>
+
+  <div class="card c6">
+    <img src="images/photostrip3.jpg" alt="Second photobooth strip">
+    <span class="tape" style="top:-10px; left:30%; transform: rotate(4deg);"></span>
+    <div class="cap">take two</div>
+  </div>
+</div>
+
+<div class="section-head">
+  <h2>commit log</h2>
+  <span class="tag">changes so far</span>
+</div>
+
+<div class="log">
+  <div class="log-item">
+    <span class="log-date">day 001</span>
+    <span class="log-msg"><span class="hash">a1f9c2</span>initial commit — met, decided to keep talking</span>
+  </div>
+  <div class="log-item">
+    <span class="log-date">day 034</span>
+    <span class="log-msg"><span class="hash">7bd410</span>refactor: fewer excuses to see each other</span>
+  </div>
+  <div class="log-item">
+    <span class="log-date">day 091</span>
+    <span class="log-msg"><span class="hash">e02c88</span>feat: added inside jokes, deprecated small talk</span>
+  </div>
+  <div class="log-item">
+    <span class="log-date">day 140</span>
+    <span class="log-msg"><span class="hash">c5a731</span>fix: survived the piggyback ride home</span>
+  </div>
+  <div class="log-item">
+    <span class="log-date">day 182</span>
+    <span class="log-msg"><span class="hash">9f0e6d</span>chore: made it official on smartphotos.ge</span>
+  </div>
+  <div class="log-item">
+    <span class="log-date">today</span>
+    <span class="log-msg"><span class="hash">HEAD</span>still in progress, no plans to merge and archive</span>
+  </div>
+</div>
+
+<footer>
+  more commits coming, probably
+  <span class="small">built with love &amp; too many photobooth strips · tbilisi, 2026</span>
+</footer>
+
+</body>
+</html>
